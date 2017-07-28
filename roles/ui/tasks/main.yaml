@@ -94,13 +94,10 @@
   register: get_serviceaccount
   ignore_errors: true
 
-- name: Create the service account
-  command: "kubectl --namespace {{ namespace }} create -f /tmp/ui.serviceaccount.yaml"
-  when: get_serviceaccount|failed
-
-- name: Replace the service account
-  command: "kubectl --namespace {{ namespace }} apply -f /tmp/ui.serviceaccount.yaml"
-  when: get_serviceaccount|succeeded
+- name: Create/Replace the service account
+  command: "kubectl --namespace {{ namespace }} {{ cmd }} -f /tmp/ui.serviceaccount.yaml"
+  vars:
+    cmd: "{{ 'create' if get_serviceaccount|failed else 'apply' }}"
 
 - name: Find out if role already exists
   command: "kubectl --namespace {{ namespace }} get role dave-ui -o json"
