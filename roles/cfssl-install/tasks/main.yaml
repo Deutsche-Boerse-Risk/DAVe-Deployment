@@ -11,7 +11,7 @@
     owner: root
     group: admin
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:43f94af7aea250ca5aa2711dea8b50b8fdff3b32e7f2147da3464d0386b3f2e4
   when: ansible_os_family == 'Darwin'
   become: true
 
@@ -22,7 +22,7 @@
     owner: root
     group: root
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:eb34ab2179e0b67c29fd55f52422a94fe751527b06a403a79325fed7cf0145bd
   when: ansible_os_family != 'Darwin'
   become: true
 
@@ -33,7 +33,7 @@
     owner: root
     group: admin
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:153cb1493dbd71741f27b2d336c529e75f20069337d856b9f981fc3fdade226d
   when: ansible_os_family == 'Darwin'
   become: true
 
@@ -44,6 +44,6 @@
     owner: root
     group: root
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:1c9e628c3b86c3f2f8af56415d474c9ed4c8f9246630bd21c3418dbe5bf6401e
   when: ansible_os_family != 'Darwin'
   become: true
