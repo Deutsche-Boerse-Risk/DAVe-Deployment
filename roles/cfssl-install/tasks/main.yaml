@@ -11,7 +11,7 @@
     owner: root
     group: admin
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:{{ cfssl_darwin_sha256_checksum }}
   when: ansible_os_family == 'Darwin'
   become: true
 
@@ -22,7 +22,7 @@
     owner: root
     group: root
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:{{ cfssl_sha256_checksum }}
   when: ansible_os_family != 'Darwin'
   become: true
 
@@ -33,7 +33,7 @@
     owner: root
     group: admin
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:{{ cfssljson_darwin_sha256_checksum }}
   when: ansible_os_family == 'Darwin'
   become: true
 
@@ -44,6 +44,6 @@
     owner: root
     group: root
     mode: 0755
-    # TODO Add hash check
+    checksum: sha256:{{ cfssljson_sha256_checksum }}
   when: ansible_os_family != 'Darwin'
   become: true
