@@ -2,6 +2,10 @@
 
 cfssl_version: "R1.2"
 cfssl_darwin_download_path: "https://pkg.cfssl.org/{{ cfssl_version }}/cfssl_darwin-amd64"
+cfssl_darwin_sha256_checksum: "43f94af7aea250ca5aa2711dea8b50b8fdff3b32e7f2147da3464d0386b3f2e4"
 cfssl_download_path: "https://pkg.cfssl.org/{{ cfssl_version }}/cfssl_linux-amd64"
+cfssl_sha256_checksum: "eb34ab2179e0b67c29fd55f52422a94fe751527b06a403a79325fed7cf0145bd"
 cfssljson_darwin_download_path: "https://pkg.cfssl.org/{{ cfssl_version }}/cfssljson_darwin-amd64"
+cfssljson_darwin_sha256_checksum: "153cb1493dbd71741f27b2d336c529e75f20069337d856b9f981fc3fdade226d"
 cfssljson_download_path: "https://pkg.cfssl.org/{{ cfssl_version }}/cfssljson_linux-amd64"
+cfssljson_sha256_checksum: "1c9e628c3b86c3f2f8af56415d474c9ed4c8f9246630bd21c3418dbe5bf6401e"
