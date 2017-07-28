@@ -18,6 +18,14 @@ store_manager_release: master
 margin_loader_release: master
 
 ##########
+# Load balancer
+##########
+
+# Use internal load balancer
+use_internal_load_balancer: true
+internal_load_balancer_ip: 0.0.0.0/0
+
+##########
 # Domain names
 ##########
 

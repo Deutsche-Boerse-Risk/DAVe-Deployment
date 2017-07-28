@@ -174,6 +174,10 @@
   command: "kubectl --namespace {{ namespace }} apply -f /tmp/api.service.yaml"
   when: get_service|succeeded
 
+- name: Add annotation if internal load balancer is used
+  command: "kubectl annotate --overwrite service dave-api service.beta.kubernetes.io/aws-load-balancer-internal='{{ internal_load_balancer_ip }}'"
+  when: use_internal_load_balancer==true
+
 # Add config-map
 
 - name: Find out if config-map already exists
