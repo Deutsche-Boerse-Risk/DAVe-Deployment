@@ -39,16 +39,26 @@ spec:
                 configMapKeyRef:
                   name: dave-ui
                   key: dave.api
-            - name: DAVE_AUTH_URL
+            - name: DAVE_AUTH_WELL_KNOWN_URL
               valueFrom:
                 configMapKeyRef:
                   name: dave-ui
-                  key: dave.auth
+                  key: dave.auth_well_known
             - name: DAVE_AUTH_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
                   name: dave-ui
                   key: dave.auth_client_id
+            - name: DAVE_AUTH_SCOPES
+              valueFrom:
+                configMapKeyRef:
+                  name: dave-ui
+                  key: dave.auth_scopes
+            - name: DAVE_AUTH_FLOW
+              valueFrom:
+                configMapKeyRef:
+                  name: dave-ui
+                  key: dave.auth_flow
             - name: DAVE_HTTP_COMPRESSION
               valueFrom:
                 configMapKeyRef:
