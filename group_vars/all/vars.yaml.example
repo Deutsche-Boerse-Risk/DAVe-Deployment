@@ -68,7 +68,7 @@ auth_dns: auth.dave.dbg-devops.com
 
 # OAuth / OpenID Connect client ID
 auth_client_id: dave-ui
-auth_well_know_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
+auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
 auth_flow: openid-connect/direct
 auth_scopes: "['profile']"
 
