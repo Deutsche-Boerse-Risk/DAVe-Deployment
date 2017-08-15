@@ -37,8 +37,6 @@ The configuration is in `group_vars/all/vars.yaml`. It configures different deta
 | `auth_client_id` | OAuth / OpenID Connect client ID | `dave-ui` |
 | `auth_flow` | OpenID authorization flow type; one of `openid-connect/direct`, `openid-connect/authorization-code`, `openid-connect/hybrid ` or`openid-connect/implicit` | `openid-connect/authorization-code` |
 | `auth_scopes` | Additional authorization scopes. The `openid` scope is added automatically. | `['profile']` |
-| `jwt_public_key` | Public key used to verify the JWT tokens | `MIIBI...DAQAB` |
-| `jwt_permissions_claim_key` | Where to find the authorization roles in the JWT key | `realm_access/roles` |
 | `api_key_path` | Path to the API private key | `./api.key` |
 | `api_cert_path` | Path to the API public key | `./api.cert` |
 | `ui_key_path` | Path to the UI private key | `./ui.key` |
