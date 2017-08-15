@@ -49,11 +49,16 @@ spec:
                 configMapKeyRef:
                   name: dave-api
                   key: api.auth
-            - name: API_AUTH_PUBLIC_KEY
+            - name: API_AUTH_WELL_KNOWN_URL
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: dave-api
-                  key: api.auth_jwt_public_key
+                  key: api.auth_well_known
+            - name: API_AUTH_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: dave-api
+                  key: api.auth_client_id
             - name: API_CSRF
               valueFrom:
                 configMapKeyRef:
@@ -64,11 +69,6 @@ spec:
                 secretKeyRef:
                   name: dave-api
                   key: api.csrf_secret
-            - name: API_AUTH_PERMISSIONS_CLAIM_KEY
-              valueFrom:
-                configMapKeyRef:
-                  name: dave-api
-                  key: api.auth_jwt_permissions_claim_key
             - name: API_SSL
               valueFrom:
                 configMapKeyRef:
