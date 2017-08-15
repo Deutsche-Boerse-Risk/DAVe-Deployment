@@ -7,6 +7,9 @@ metadata:
     project: dave
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ ui_dns }}.
+{% if use_internal_load_balancer %}
+    service.beta.kubernetes.io/aws-load-balancer-internal: '{{ internal_load_balancer_ip }}'
+{% endif %}
   name: dave-ui
   namespace: {{ namespace }}
 spec:
