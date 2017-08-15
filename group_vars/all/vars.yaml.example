@@ -68,6 +68,9 @@ auth_dns: auth.dave.dbg-devops.com
 
 # OAuth / OpenID Connect client ID
 auth_client_id: dave-ui
+auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
+auth_flow: openid-connect/direct
+auth_scopes: "['profile']"
 
 # Key for veryfing JWT tokens
 jwt_public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnSurUgy/OGvmlIEOS++tjW8TgIAZxUdxCCwmW2MUUPo4jx+xgVtd9b6S+HpYsH1bJoW1EGSCmriW5XxM/8WQgamBGhITN+/RFSCYkWigpgAD2MWjln5VydO3DjCnzq0VFFSo9tHmgKlEHPSHr/KNHg9686Zcfv9s/HtqnE/igJIScNqFmSZXDM9HcA7H08J+Cpzm0tw5ZoDOkc6him0se5ebjwf1jkEnjBnvXePaSjB3zk2PdM8RUNSAq3ea6kqBpn+H1ousso4q+ssXxvbCRlPQJzenGAr09dYMb37L3C3FJi5XWMxkr/w+ULaqAb+8qc28SJwh2K4RWcGFBJ5CpwIDAQAB"
