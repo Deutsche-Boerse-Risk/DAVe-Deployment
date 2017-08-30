@@ -94,3 +94,16 @@ database_name: DAVe-master
 db_unload_url: https://s3-eu-west-1.amazonaws.com/dave-demo-test-data/dave20.tar.gz
 # Path under which the actual unload files are stored in the archive
 db_unload_path: "mongo/DAVe"
+
+ui_min_replicas: 1
+ui_max_replicas: 10
+
+api_min_replicas: 1
+api_max_replicas: 10
+
+store_manager_min_replicas: 1
+store_manager_max_replicas: 10
+
+margin_loader_min_replicas: 1
+margin_loader_max_replicas: 10
+

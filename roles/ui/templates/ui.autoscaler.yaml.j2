@@ -8,6 +8,6 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: dave-ui
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: {{ ui_min_replicas }}
+  maxReplicas: {{ ui_max_replicas }}
   targetCPUUtilizationPercentage: 75

@@ -202,7 +202,7 @@
 - name: Verify that all pods are ready
   shell: kubectl --namespace {{ namespace }} get pods | grep "dave-store-manager" | grep "Running" | wc -l
   register: cmd_result
-  until: cmd_result.stdout.find('1') != -1
+  until: cmd_result.stdout.find('{{ store_manager_min_replicas }}') != -1
   retries: 20
   delay: 30
 

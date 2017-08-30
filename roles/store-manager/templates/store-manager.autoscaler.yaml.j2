@@ -8,6 +8,6 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: dave-store-manager
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: {{ store_manager_min_replicas }}
+  maxReplicas: {{ store_manager_max_replicas }}
   targetCPUUtilizationPercentage: 75
