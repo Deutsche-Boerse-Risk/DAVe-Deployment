@@ -50,6 +50,15 @@ The configuration is in `group_vars/all/vars.yaml`. It configures different deta
 | `cil_port` | Port where the CIL AMQP broker is listening | `5672` |
 | `cil_username` | Username for connecting to the CIL AMQP broker | `DAVE` |
 | `cil_password` | Password for connecting to the CIL AMQP broker | |
+| `ui_min_replicas` | Min number of replicas for UI | `1` |
+| `ui_max_replicas` | Max number of replicas for UI | `10` |
+| `api_min_replicas` | Min number of replicas for API | `1` |
+| `api_max_replicas` | Max number of replicas for API | `10` |
+| `store_manager_min_replicas` | Min number of replicas for StoreManager | `1` |
+| `store_manager_max_replicas` | Max number of replicas for StoreManager | `10` |
+| `margin_loader_min_replicas` | Min number of replicas for MarginLoader | `1` |
+| `margin_loader_max_replicas` | Max number of replicas for MarginLoader | `10` |
+
 
 Following configuration is needed only for signing the certificates with Let's Encrypt:
 
