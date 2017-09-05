@@ -6,3 +6,6 @@
 *.key
 *.csr
 ca-*/
+
+#IntelliJ IDEA files
+.idea/workspace.xml
