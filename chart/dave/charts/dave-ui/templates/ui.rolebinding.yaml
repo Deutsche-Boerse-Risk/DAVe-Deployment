@@ -1,0 +1,17 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: dave-ui
+  labels:
+    app: dave
+    layer: frontend
+    project: dave
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: dave-ui
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: dave-ui
+  apiGroup: rbac.authorization.k8s.io

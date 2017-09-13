@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dave-api
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: dave
+    layer: api
+    project: dave
+data:
+  java.opts: "-Xmx768m"
+  log.level: "INFO"
+  api.ssl: "true"
+  api.ssl_client_auth: "false"
+  api.compression: "true"
+  api.auth: "true"
+  api.auth_well_known: "https://{{ .Values.global.auth_dns }}{{ .Values.global.auth_well_known_endpoint }}"
+  api.auth_client_id: "{{ .Values.global.auth_client_id }}"
+  api.cors: "true"
+  api.cors_origin: "*"
+  api.csfr: "true"
+  storemanager.ssl_verify_host: "false"

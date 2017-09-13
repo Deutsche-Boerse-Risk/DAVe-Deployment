@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dave-margin-loader
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: dave
+    layer: loader
+    project: dave
+data:
+  java.opts: "-Xmx768m -XX:MaxDirectMemorySize=768m"
+  log.level: "INFO"
+  margin_loader.amqp_username: {{ .Values.cil_username | quote }}
+  margin_loader.amqp_hostname: {{ .Values.cil_hostname | quote }}
+  margin_loader.amqp_port: {{ .Values.cil_port | quote }}

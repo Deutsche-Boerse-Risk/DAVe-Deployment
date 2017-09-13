@@ -1,0 +1,23 @@
+kind: NetworkPolicy
+apiVersion: extensions/v1beta1
+metadata:
+  name: dave-mongo-access
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      app: mongo
+      layer: db
+      project: dave
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: mongo
+            layer: db
+            project: dave
+      - podSelector:
+          matchLabels:
+            app: dave
+            layer: db
+            project: dave

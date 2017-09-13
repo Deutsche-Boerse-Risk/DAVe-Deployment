@@ -1,0 +1,10 @@
+apiVersion: v1
+description: A Helm chart for DAVe
+name: dave
+version: 1.0.0
+keywords:
+  - dave
+home: https://github.com/Deutsche-Boerse-Risk
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

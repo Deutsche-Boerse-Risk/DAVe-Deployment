@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dave-resource-quota
+spec:
+  hard:
+    services: "4"
+    pods: "30"
+    requests.cpu: "10"
+    requests.memory: 20Gi
+    limits.cpu: "30"
+    limits.memory: 40Gi

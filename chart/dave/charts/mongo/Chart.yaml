@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for DAVe Mongo DB (replicated)
+name: dave-mongo
+version: 1.0.0
+keywords:
+  - dave
+  - mongo
+home: https://github.com/Deutsche-Boerse-Risk
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

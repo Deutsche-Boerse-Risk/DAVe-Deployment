@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for DAVe API
+name: dave-api
+version: 1.0.0
+keywords:
+  - dave
+  - api
+home: https://github.com/Deutsche-Boerse-Risk/DAVe
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

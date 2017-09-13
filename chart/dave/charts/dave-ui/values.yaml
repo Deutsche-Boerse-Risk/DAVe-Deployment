@@ -1,0 +1,57 @@
+release: master
+
+min_replicas: 2
+max_replicas: 3
+
+global:
+  ui_dns: ui.risk.dev.dbgcloud.io
+  api_dns: api.risk.dev.dbgcloud.io
+  use_internal_load_balancer: true
+  internal_load_balancer_ip: 0.0.0.0/0
+  auth_dns: auth.dave.dbg-devops.com
+  auth_client_id: dave-ui
+  auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
+
+auth_flow: openid-connect/direct
+auth_scopes: "['profile']"
+
+ui_key_b64enc: REQUIRED
+ui_cert_b64enc: REQUIRED
+
+# Default values for dave.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#replicaCount: 1
+#image:
+#  repository: nginx
+#  tag: stable
+#  pullPolicy: IfNotPresent
+#service:
+#  name: nginx
+#  type: ClusterIP
+#  externalPort: 80
+#  internalPort: 80
+#ingress:
+#  enabled: false
+#  # Used to create an Ingress record.
+#  hosts:
+#    - chart-example.local
+#  annotations:
+#    # kubernetes.io/ingress.class: nginx
+#    # kubernetes.io/tls-acme: "true"
+#  tls:
+#    # Secrets must be manually created in the namespace.
+#    # - secretName: chart-example-tls
+#    #   hosts:
+#    #     - chart-example.local
+#resources: {}
+#  # We usually recommend not to specify default resources and to leave this as a conscious
+#  # choice for the user. This also increases chances charts run on environments with little
+#  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+#  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+#  # limits:
+#  #  cpu: 100m
+#  #  memory: 128Mi
+#  # requests:
+#  #  cpu: 100m
+#  #  memory: 128Mi

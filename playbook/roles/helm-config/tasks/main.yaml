@@ -1,0 +1,5 @@
+- name: Render Helm config template
+  template:
+    src: helm-values.yaml.j2
+    dest: "{{ helm_config }}"
+  become: false
