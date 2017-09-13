@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for DAVe Margin Loader
+name: dave-margin-loader
+version: 1.0.0
+keywords:
+  - dave
+  - margin-loader
+home: https://github.com/Deutsche-Boerse-Risk/DAVe-MarginLoader
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

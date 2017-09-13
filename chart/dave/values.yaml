@@ -1,0 +1,48 @@
+global:
+  ui_dns: <prefix>.dev.dbgcloud.io
+  api_dns: <prefix>.dev.dbgcloud.io
+  use_internal_load_balancer: true
+  internal_load_balancer_ip: 0.0.0.0/0
+  auth_dns: auth.dave.dbg-devops.com
+  auth_client_id: dave-ui
+  auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
+  ca_cert_b64enc: REQUIRED
+ 
+dave-ui:
+  release: master
+  min_replicas: 2
+  max_replicas: 3
+  auth_flow: openid-connect/direct
+  auth_scopes: "['profile']"
+  ui_key_b64enc: REQUIRED
+  ui_cert_b64enc: REQUIRED
+
+dave-store-manager:
+  release: master
+  min_replicas: 2
+  max_replicas: 3
+  api_key_b64enc: REQUIRED
+  api_cert_b64enc: REQUIRED
+  database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
+  database_name: DAVe-master
+
+dave-margin-loader:
+  release: master
+  min_replicas: 2
+  max_replicas: 3
+  ssl_key_b64enc: REQUIRED
+  ssl_cert_b64enc: REQUIRED
+  cil_hostname: REQUIRED
+  cil_port: REQUIRED
+  cil_username: REQUIRED
+  cil_password: REQUIRED
+
+dave-api:
+  release: master
+  min_replicas: 2
+  max_replicas: 3
+  api_key_b64enc: REQUIRED
+  api_cert_b64enc: REQUIRED
+  ssl_key_b64enc: REQUIRED
+  ssl_cert_b64enc: REQUIRED
+

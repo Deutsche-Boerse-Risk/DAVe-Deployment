@@ -1,0 +1,15 @@
+---
+
+dns_zone: dbg-devops.com
+ui_dns: ui.risk.dev.dbgcloud.io
+api_dns: api.risk.dev.dbgcloud.io
+
+letsencrypt_account_key_path: ../account.key
+acme_directory: https://acme-v01.api.letsencrypt.org/directory # Production
+# acme_directory: https://acme-staging.api.letsencrypt.org/directory # Staging
+
+# External SSL certificates
+api_key_path: ../certs_external/api.master.key
+api_cert_path: ../certs_external/api.master.crt
+ui_key_path: ../certs_external/ui.master.key
+ui_cert_path: ../certs_external/ui.master.crt

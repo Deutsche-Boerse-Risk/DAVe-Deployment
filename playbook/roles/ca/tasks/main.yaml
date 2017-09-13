@@ -1,0 +1,31 @@
+---
+
+####################
+# Create DAVE CA for securing the communication between services
+####################
+
+# Render templates
+
+- name: Create CA directory
+  file: path={{ certs_internal }} state=directory
+
+- name: Render CA template
+  template:
+    src: ca.json.j2
+    dest: "{{ certs_internal }}/ca.json"
+  become: false
+
+# Generate the CA
+
+- stat:
+    path: "{{ certs_internal }}/ca.pem"
+  register: ca_key
+
+- name: Generate the CA
+  shell: "cfssl genkey -initca ca.json | cfssljson -bare ca"
+  args:
+    chdir: "{{ certs_internal }}"
+  when: not ca_key.stat.exists
+
+- set_fact:
+    ca_public_key: "{{ certs_internal }}/ca.pem"

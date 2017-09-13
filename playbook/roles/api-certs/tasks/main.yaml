@@ -1,0 +1,28 @@
+- name: Render internal SSL template
+  template:
+    src: api-ssl.json.j2
+    dest: "{{ certs_internal }}/api-ssl.json"
+  become: false
+
+- name: Create the internal SSL keys
+  shell: "cfssl gencert -ca ca.pem -ca-key ca-key.pem api-ssl.json | cfssljson -bare api-ssl"
+  args:
+    chdir: "{{ certs_internal }}"
+
+- name: Convert PKCS1 to PKCS8
+  shell: "openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in api-ssl-key.pem -out api-ssl-pkcs8.pem"
+  args:
+    chdir: "{{ certs_internal }}"
+
+- set_fact:
+   api_ssl_key: "{{ certs_internal }}/api-ssl-pkcs8.pem"
+   api_ssl_cert: "{{ certs_internal }}/api-ssl.pem"
+
+# Convert LE private key to PKCS8
+
+- name: Convert PKCS1 to PKCS8
+  shell: "openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in {{ api_key_path }} -out {{ certs_internal }}/api-signed-private-key-pkcs8.key"
+
+- set_fact:
+   api_key_path_pkcs8: "{{ certs_internal }}/api-signed-private-key-pkcs8.key"
+

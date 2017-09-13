@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dave-margin-loader
+  namespace: {{ .Release.Namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: dave-margin-loader
+  minReplicas: {{ .Values.min_replicas }}
+  maxReplicas: {{ .Values.max_replicas }}
+  targetCPUUtilizationPercentage: 75

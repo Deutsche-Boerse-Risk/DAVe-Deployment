@@ -1,0 +1,13 @@
+---
+###########################
+# Install DAVe application
+###########################
+
+- hosts: localhost
+  connection: local
+  roles:
+    - ca
+    - store-manager-certs
+    - margin-loader-certs
+    - api-certs
+    - helm-config

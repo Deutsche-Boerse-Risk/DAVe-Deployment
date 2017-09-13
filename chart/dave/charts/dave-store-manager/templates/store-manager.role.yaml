@@ -1,0 +1,10 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: dave-store-manager
+  labels:
+    app: dave
+    layer: db
+    project: dave
+  namespace: {{ .Release.Namespace }}
+rules:

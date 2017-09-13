@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for DAVe Store Manager
+name: dave-store-manager
+version: 1.0.0
+keywords:
+  - dave
+  - store-manager
+home: https://github.com/Deutsche-Boerse-Risk/DAVe-StoreManager
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

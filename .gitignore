@@ -5,7 +5,8 @@
 *.pem
 *.key
 *.csr
-ca-*/
+certs_internal/
+certs_external/
 
 #IntelliJ IDEA files
 .idea/workspace.xml

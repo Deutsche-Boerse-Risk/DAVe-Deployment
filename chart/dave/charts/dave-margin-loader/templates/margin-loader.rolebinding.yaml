@@ -1,0 +1,17 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: dave-margin-loader
+  labels:
+    app: dave
+    layer: loader
+    project: dave
+  namespace: {{ .Release.Namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: dave-margin-loader
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: dave-margin-loader
+  apiGroup: rbac.authorization.k8s.io
