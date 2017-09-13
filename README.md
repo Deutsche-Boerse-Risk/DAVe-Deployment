@@ -11,14 +11,13 @@ connect to any remote machines. You need to have following tools installed:
 * [Ansible 2.2](http://docs.ansible.com/ansible/latest/intro_installation.html#installation)
 * [Helm](https://github.com/kubernetes/helm)
 * Kubectl with proper configuration to connect to running Kubernetes cluster
-* boto library which will be used for communication with Amazon AWS APIs
 * OpenSSL for generating new SSL keys (only the Let's Encrypt playbook)
-* CFSSL for generating the internal SSL keys / managing the internal CA
+* CFSSL for generating the internal SSL keys / managing the internal CA:
+    ```
+    ansible-playbook playbook/cfssl-install.yaml
+    ```
 
-Before installation, the SSL certificated for external communication (CA signed certificates) have to be available. You can create them manually or use the prepared playbook:
-* [letsencrypt.yaml](#signed-certificates-with-lets-encrypt)
-
-**Before running the playbook, you have to set the AWS credentials for communication with the AWS services as environment variables.**
+Before installation, the SSL certificated for external communication (CA signed certificates) have to be available.
 
 ## Generating certificates and Helm config
 ```
@@ -26,9 +25,6 @@ cp playbook/group_vars/vars.yaml.example <userID>.yaml
 [ EDIT <userID>.yaml ]
 ansible-playbook playbook/install.yaml --extra-vars "@<userID>.yaml"
 ```
-### Configuration
-
-The configuration is in `playbook/group_vars/all/vars.yaml`.
 
 | Variable | Explanation | Example |
 |--------|-------------|---------|
@@ -75,25 +71,3 @@ helm install --namespace <NAMESPACE> -f helm-values.yaml chart/dave
 | `dave-margin-loader.cil_username` | Username for connecting to the CIL AMQP broker | `DAVE` |
 | `dave-margin-loader.cil_password` | Password for connecting to the CIL AMQP broker | |
 
-## Signed certificates with Let's Encrypt
-
-Playbook `letsencrypt.yaml` can be used to obtain signed keys from Let's Encrypt CA. Export the variables with AWS access tokens and run:
-```
-ansible-playbook playbook/letsencrypt.yaml
-```
-
-### Letsencrypt configuration
-| Variable | Explanation | Example |
-|--------|-------------|---------|
-| `letsencrypt_account_key_path` | Path where the Let's Encrypt account key is / should be created | `./account.key` |
-| `acme_directory` | Let's Encrypt ACME directory where we the certificates should be signed (production or staging) | `https://acme-staging.api.letsencrypt.org/directory` |
-
-* If the account key is missing, it will generate new account key
-* If the UI key is missing, it will generate the UI key with the UI hostname in CN
-* It will generate UI CSR
-* If the API key is missing, it will generate the API key with the API hostname in CN
-* It will generate API CSR
-* It will try to get the certificates signed. DNS verification will be used - Route53 will be automatically used to handle it.
-* The keys will be signed only if the old keys expire in 10 or less days
-
-*The `acme_directory` variable can be used to define whether the production Let's Encrypt service should be used or the staging service (for testing).*
