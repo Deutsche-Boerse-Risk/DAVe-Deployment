@@ -19,7 +19,7 @@ connect to any remote machines. You need to have following tools installed:
 
 Before installation, the SSL certificated for external communication (CA signed certificates) have to be available.
 
-## Generating certificates and Helm config
+## Generating certificates and initial Helm config
 ```
 cp playbook/group_vars/vars.yaml.example <userID>.yaml
 [ EDIT <userID>.yaml ]
