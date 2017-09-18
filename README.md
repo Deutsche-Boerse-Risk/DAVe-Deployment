@@ -10,6 +10,10 @@ The tooling for generating the certificates and Helm config is written in Ansibl
 connect to any remote machines. You need to have following tools installed:
 * [Ansible 2.2](http://docs.ansible.com/ansible/latest/intro_installation.html#installation)
 * [Helm](https://github.com/kubernetes/helm)
+    - init Helm with:
+    ```
+    helm init --client-only
+    ```
 * Kubectl with proper configuration to connect to running Kubernetes cluster
 * OpenSSL for generating new SSL keys (only the Let's Encrypt playbook)
 * CFSSL for generating the internal SSL keys / managing the internal CA:
@@ -21,7 +25,7 @@ Before installation, the SSL certificated for external communication (CA signed 
 
 ## Generating certificates and initial Helm config
 ```
-cp playbook/group_vars/vars.yaml.example <userID>.yaml
+cp playbook/group_vars/all/vars.yaml.example <userID>.yaml
 [ EDIT <userID>.yaml ]
 ansible-playbook playbook/install.yaml --extra-vars "@<userID>.yaml"
 ```
@@ -71,3 +75,17 @@ helm install --namespace <NAMESPACE> -f helm-values.yaml chart/dave
 | `dave-margin-loader.cil_username` | Username for connecting to the CIL AMQP broker | `DAVE` |
 | `dave-margin-loader.cil_password` | Password for connecting to the CIL AMQP broker | |
 
+## Uninstalling DAVe
+To delete DAVe and all resources there are several steps needed, since persistence volumes (Mongo DB) remains available in AWS.
+
+* uninstall DAVe package/release
+```
+helm delete [DAVe release (found by running helm ls)]
+```
+
+* in Kubernetes dashboard (UI) delete all three persistence volumes requested by Mongo deployment
+* go to AWS console and delete all three persistence volumes related to Mongo (otherwise would be marked as available)
+* delete the namespace (if not shared by someone else)
+```
+kubectl delete namespace [NAMESPACE]
+```
