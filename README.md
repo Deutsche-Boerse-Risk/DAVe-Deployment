@@ -15,7 +15,7 @@ connect to any remote machines. You need to have following tools installed:
     helm init --client-only
     ```
 * Kubectl with proper configuration to connect to running Kubernetes cluster
-* OpenSSL for generating new SSL keys (only the Let's Encrypt playbook)
+* OpenSSL for generating new SSL keys
 * CFSSL for generating the internal SSL keys / managing the internal CA:
     ```
     ansible-playbook playbook/cfssl-install.yaml
