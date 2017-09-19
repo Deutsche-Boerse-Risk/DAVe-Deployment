@@ -10,7 +10,7 @@ global:
   ca_cert_b64enc: REQUIRED
 
 database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-database_name: DAVe-master
+database_name: DAVe
 
 # Default values for dave.
 # This is a YAML-formatted file.

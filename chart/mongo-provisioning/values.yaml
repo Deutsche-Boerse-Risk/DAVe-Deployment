@@ -1,0 +1,8 @@
+database_name: DAVe-master
+
+# URL when tared and gziped unload of the database can be downloaded and loaded into the database
+db_unload_url: https://s3-eu-west-1.amazonaws.com/dave-demo-test-data/dave20.tar.gz
+
+# Path under which the actual unload files are stored in the archive
+db_unload_path: mongo
+database_connection_url: rs0/dave-mongo-0.dave-mongo.dave:27017,dave-mongo-1.dave-mongo.dave:27017,dave-mongo-2.dave-mongo.dave:27017

@@ -1,0 +1,11 @@
+apiVersion: v1
+description: A Helm chart for provisioning Mongo DB
+name: mongo-provisioning
+version: 1.0.0
+keywords:
+  - mongo
+  - provisioning
+home: https://github.com/Deutsche-Boerse-Risk
+maintainers:
+  - name: Risk-IT
+    email: RiskITBrowserStack@deutsche-boerse.com

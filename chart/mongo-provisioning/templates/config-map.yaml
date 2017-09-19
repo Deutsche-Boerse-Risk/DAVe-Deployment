@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restore-script-volume
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: mongo-provisioning
+    layer: db
+    project: dave
+data:
+  mongo-restore.sh: |-
+    pushd /db
+    tar -xzf db.tar.gz
+    mongorestore --host={{ .Values.database_connection_url | quote }} --nsInclude='DAVe.*' --nsFrom='DAVe.*' --nsTo='{{ .Values.database_name }}.*' --drop {{ .Values.db_unload_path }}
+    popd

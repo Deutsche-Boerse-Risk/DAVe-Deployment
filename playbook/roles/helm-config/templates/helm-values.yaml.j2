@@ -24,7 +24,7 @@ dave-store-manager:
   api_key_b64enc: {{ lookup('file', store_manager_ssl_key) | b64encode }}
   api_cert_b64enc: {{ lookup('file', store_manager_ssl_cert) | b64encode }}
   database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-  database_name: DAVe-master
+  database_name: DAVe
 
 dave-margin-loader:
   release: master

@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongo-provisioning
+  labels:
+    app: mongo-provisioning
+    layer: db
+    project: dave
+  namespace: {{ .Release.Namespace }}
+spec:
+  activeDeadlineSeconds: 100
+  template:
+    metadata:
+      labels:
+        app: mongo-provisioning
+        layer: db
+        project: dave
+    spec:
+      containers:
+      - name: db-restore
+        image: mongo:3.4
+        volumeMounts:
+          - mountPath: /db
+            name: db-volume
+          - mountPath: /restore-script
+            name: restore-script-volume
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        command: ["bash", "restore-script/mongo-restore.sh"]
+      initContainers:
+      - name: db-download
+        image: busybox
+        volumeMounts:
+          - mountPath: /db
+            name: db-volume
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        command: ["wget",  {{ .Values.db_unload_url | quote }}, "-O", "/db/db.tar.gz"]
+      volumes:
+        - name: db-volume
+          emptyDir: {}
+        - name: restore-script-volume
+          configMap:
+            name: restore-script-volume 
+      restartPolicy: Never

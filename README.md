@@ -75,6 +75,30 @@ helm install --namespace <NAMESPACE> -f helm-values.yaml chart/dave
 | `dave-margin-loader.cil_username` | Username for connecting to the CIL AMQP broker | `DAVE` |
 | `dave-margin-loader.cil_password` | Password for connecting to the CIL AMQP broker | |
 
+
+## Loading data into DAVe
+It is possible to load dumped database into the running DAVe's Mongo DB. A separate Helm package `mongo-provisioning` can be
+used:
+```
+helm install --namespace <NAMESPACE> chart/mongo-provisioning
+```
+
+The package can be installed into the same namespace as DAVe, however it is not required. Package should work out of the box
+with the default values, if you want to use specific location of the dumped archive or another database name, please
+edit `chart/mongo-provisioning/values.yaml`
+
+| Variable | Explanation | Example |
+|--------|-------------|---------|
+| `database_name` | Database name into which dump should be restored | `DAVe` |
+| `db_unload_url` | Url of the dumped archive |  |
+| `db_unload_path` | Directory beneath which (after unzipping) the files reside | `mongo` |
+| `database_connection_url` | Connection url to the running Mongo (replica) DB |  |
+
+Package works as a Kubernetes Job. Once the data are restored into the DB, the package can be safely removed from the cluster:
+```
+helm delete [mongo-provisioning release (found by running helm ls)]
+```
+
 ## Uninstalling DAVe
 To delete DAVe and all resources there are several steps needed, since persistence volumes (Mongo DB) remains available in AWS.
 
