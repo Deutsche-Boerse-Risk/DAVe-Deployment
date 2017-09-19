@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-pushd tmp
-tar -z -xf mongo.backup.tar.gz
-mongorestore -d {{ databaseName }} --drop {{ db_unload_path }}
-rm -rf mongo.backup.tar.gz {{ db_unload_path }}
-popd
