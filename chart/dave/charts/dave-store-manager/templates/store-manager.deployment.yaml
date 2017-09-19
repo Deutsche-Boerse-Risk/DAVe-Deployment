@@ -8,7 +8,7 @@ metadata:
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.min_replicas }}
+  replicas: {{ .Values.minReplicas }}
   template:
     metadata:
       name: dave-store-manager

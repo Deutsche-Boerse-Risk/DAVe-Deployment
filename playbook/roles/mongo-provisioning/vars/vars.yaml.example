@@ -2,7 +2,7 @@
 namespace: master
 
 # Database (MongoDB) configuration
-database_name: DAVe-master
+databaseName: DAVe-master
 
 # URL when tared and gziped unload of the database can be doanloaded and loaded into the database
 db_unload_url: https://s3-eu-west-1.amazonaws.com/dave-demo-test-data/dave20.tar.gz

@@ -8,7 +8,7 @@ metadata:
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.min_replicas }}
+  replicas: {{ .Values.minReplicas }}
   template:
     metadata:
       name: dave-api
@@ -58,7 +58,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: dave-api
-                  key: api.auth_client_id
+                  key: api.authClientId
             - name: API_CSRF
               valueFrom:
                 configMapKeyRef:

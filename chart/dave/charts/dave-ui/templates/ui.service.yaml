@@ -6,9 +6,9 @@ metadata:
     layer: frontend
     project: dave
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: {{ .Values.global.ui_dns }}.
-    {{- if .Values.global.use_internal_load_balancer }}
-    service.beta.kubernetes.io/aws-load-balancer-internal: {{ .Values.global.internal_load_balancer_ip | quote }}
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.global.uiDns }}.
+    {{- if .Values.global.useInternalLoadBalancer }}
+    service.beta.kubernetes.io/aws-load-balancer-internal: {{ .Values.global.internalLoadBalancerIp | quote }}
     {{- end }}
   name: dave-ui
   namespace: {{ .Release.Namespace }}

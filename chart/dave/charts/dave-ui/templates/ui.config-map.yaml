@@ -8,9 +8,9 @@ metadata:
     layer: frontend
     project: dave
 data:
-  dave.api: "https://{{ .Values.global.api_dns }}"
-  dave.auth_well_known: "https://{{ .Values.global.auth_dns }}{{ .Values.global.auth_well_known_endpoint }}"
-  dave.auth_client_id: "{{ .Values.global.auth_client_id }}"
-  dave.auth_flow: "{{ .Values.auth_flow }}"
-  dave.auth_scopes: "{{ .Values.auth_scopes }}"
+  dave.api: "https://{{ .Values.global.apiDns }}"
+  dave.auth_well_known: "https://{{ .Values.global.authDns }}{{ .Values.global.authWellKnownEndpoint }}"
+  dave.authClientId: "{{ .Values.global.authClientId }}"
+  dave.authFlow: "{{ .Values.authFlow }}"
+  dave.authScopes: "{{ .Values.authScopes }}"
   http.compression: "1"

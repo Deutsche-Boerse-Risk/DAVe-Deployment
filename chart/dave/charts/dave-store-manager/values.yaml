@@ -1,16 +1,16 @@
 release: master
 
-min_replicas: 2
-max_replicas: 3
+minReplicas: 2
+maxReplicas: 3
 
-api_key_b64enc: REQUIRED
-api_cert_b64enc: REQUIRED
+apiKeyB64Enc: REQUIRED
+apiCertB64Enc: REQUIRED
 
 global:
-  ca_cert_b64enc: REQUIRED
+  caCertB64Enc: REQUIRED
 
-database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-database_name: DAVe
+databaseConnectionUrl: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
+databaseName: DAVe
 
 # Default values for dave.
 # This is a YAML-formatted file.

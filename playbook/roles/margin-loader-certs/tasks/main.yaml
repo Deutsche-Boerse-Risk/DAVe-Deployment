@@ -1,19 +1,19 @@
 - name: Render internal SSL template
   template:
     src: margin-loader-ssl.json.j2
-    dest: "{{ certs_internal }}/margin-loader-ssl.json"
+    dest: "{{ certsInternal }}/margin-loader-ssl.json"
   become: false
 
 - name: Generate and sign the service SSL certificate
   shell: "cfssl gencert -ca ca.pem -ca-key ca-key.pem margin-loader-ssl.json | cfssljson -bare margin-loader-ssl"
   args:
-    chdir: "{{ certs_internal }}"
+    chdir: "{{ certsInternal }}"
 
 - name: Convert PKCS1 to PKCS8
   shell: "openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in margin-loader-ssl-key.pem -out margin-loader-ssl-pkcs8.pem"
   args:
-    chdir: "{{ certs_internal }}"
+    chdir: "{{ certsInternal }}"
 
 - set_fact:
-    margin_loader_ssl_key: "{{ certs_internal }}/margin-loader-ssl-pkcs8.pem"
-    margin_loader_ssl_cert: "{{ certs_internal }}/margin-loader-ssl.pem"
+    margin_loader_ssl_key: "{{ certsInternal }}/margin-loader-ssl-pkcs8.pem"
+    margin_loader_ssl_cert: "{{ certsInternal }}/margin-loader-ssl.pem"

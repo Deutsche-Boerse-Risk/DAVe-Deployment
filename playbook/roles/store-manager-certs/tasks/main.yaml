@@ -1,20 +1,20 @@
 - name: Render internal SSL template
   template:
     src: store-manager-ssl.json.j2
-    dest: "{{ certs_internal }}/store-manager-ssl.json"
+    dest: "{{ certsInternal }}/store-manager-ssl.json"
   become: false
 
 - name: Generate and sign the service SSL certificate
   shell: "cfssl gencert -ca ca.pem -ca-key ca-key.pem store-manager-ssl.json | cfssljson -bare store-manager-ssl"
   args:
-    chdir: "{{ certs_internal }}"
+    chdir: "{{ certsInternal }}"
 
 - name: Convert PKCS1 to PKCS8
   shell: "openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in store-manager-ssl-key.pem -out store-manager-ssl-pkcs8.pem"
   args:
-    chdir: "{{ certs_internal }}"
+    chdir: "{{ certsInternal }}"
 
 - set_fact:
-    store_manager_ssl_key: "{{ certs_internal }}/store-manager-ssl-pkcs8.pem"
-    store_manager_ssl_cert: "{{ certs_internal }}/store-manager-ssl.pem"
+    store_manager_ssl_key: "{{ certsInternal }}/store-manager-ssl-pkcs8.pem"
+    store_manager_ssl_cert: "{{ certsInternal }}/store-manager-ssl.pem"
 

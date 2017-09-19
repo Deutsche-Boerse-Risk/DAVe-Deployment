@@ -11,5 +11,5 @@ data:
   mongo-restore.sh: |-
     pushd /db
     tar -xzf db.tar.gz
-    mongorestore --host={{ .Values.database_connection_url | quote }} --nsInclude='DAVe.*' --nsFrom='DAVe.*' --nsTo='{{ .Values.database_name }}.*' --drop {{ .Values.db_unload_path }}
+    mongorestore --host={{ .Values.databaseConnectionUrl | quote }} --nsInclude='DAVe.*' --nsFrom='DAVe.*' --nsTo='{{ .Values.databaseName }}.*' --drop {{ .Values.db_unload_path }}
     popd

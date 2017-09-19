@@ -1,12 +1,12 @@
 ---
 
-helm_config: ../helm-values.yaml
+helmConfig: ../helm-values.yaml
 
 # External SSL certificates
-api_key_path: ../certs_external/api.master.key
-api_cert_path: ../certs_external/api.master.crt
-ui_key_path: ../certs_external/ui.master.key
-ui_cert_path: ../certs_external/ui.master.crt
+apiKeyPath: ../certs_external/api.master.key
+apiCertPath: ../certs_external/api.master.crt
+uiKeyPath: ../certs_external/ui.master.key
+uiCertPath: ../certs_external/ui.master.crt
 
 # Internal SSL certificates
-certs_internal: ../certs_internal/
+certsInternal: ../certs_internal/

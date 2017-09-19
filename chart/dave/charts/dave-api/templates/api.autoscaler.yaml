@@ -8,6 +8,6 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: dave-api
-  minReplicas: {{ .Values.min_replicas }}
-  maxReplicas: {{ .Values.max_replicas }}
+  minReplicas: {{ .Values.minReplicas }}
+  maxReplicas: {{ .Values.maxReplicas }}
   targetCPUUtilizationPercentage: 75

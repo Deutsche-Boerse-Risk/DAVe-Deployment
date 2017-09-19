@@ -1,22 +1,22 @@
 release: master
 
-min_replicas: 2
-max_replicas: 3
+minReplicas: 2
+maxReplicas: 3
 
 global:
-  ui_dns: ui.risk.dev.dbgcloud.io
-  api_dns: api.risk.dev.dbgcloud.io
-  use_internal_load_balancer: true
-  internal_load_balancer_ip: 0.0.0.0/0
-  auth_dns: auth.dave.dbg-devops.com
-  auth_client_id: dave-ui
-  auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
+  uiDns: ui.risk.dev.dbgcloud.io
+  apiDns: api.risk.dev.dbgcloud.io
+  useInternalLoadBalancer: true
+  internalLoadBalancerIp: 0.0.0.0/0
+  authDns: auth.dave.dbg-devops.com
+  authClientId: dave-ui
+  authWellKnownEndpoint: /auth/realms/DAVe/.well-known/openid-configuration
 
-auth_flow: openid-connect/direct
-auth_scopes: "['profile']"
+authFlow: openid-connect/direct
+authScopes: "['profile']"
 
-ui_key_b64enc: REQUIRED
-ui_cert_b64enc: REQUIRED
+uiKeyB64Enc: REQUIRED
+uiCertB64Enc: REQUIRED
 
 # Default values for dave.
 # This is a YAML-formatted file.

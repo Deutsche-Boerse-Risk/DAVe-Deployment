@@ -1,18 +1,18 @@
 release: master
 
-min_replicas: 2
-max_replicas: 3
+minReplicas: 2
+maxReplicas: 3
 
-api_key_b64enc: REQUIRED
-api_cert_b64enc: REQUIRED  
-ssl_key_b64enc: REQUIRED
-ssl_cert_b64enc: REQUIRED
+apiKeyB64Enc: REQUIRED
+apiCertB64Enc: REQUIRED
+sslKeyB64Enc: REQUIRED
+sslCertB64Enc: REQUIRED
 
 global:
-  api_dns: api.risk.dev.dbgcloud.io
-  use_internal_load_balancer: true
-  internal_load_balancer_ip: 0.0.0.0/0
-  ca_cert_b64enc: REQUIRED
+  apiDns: api.risk.dev.dbgcloud.io
+  useInternalLoadBalancer: true
+  internalLoadBalancerIp: 0.0.0.0/0
+  caCertB64Enc: REQUIRED
 
 # Default values for dave.
 # This is a YAML-formatted file.

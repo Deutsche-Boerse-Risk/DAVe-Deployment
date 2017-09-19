@@ -8,7 +8,7 @@ metadata:
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.min_replicas }}
+  replicas: {{ .Values.minReplicas }}
   template:
     metadata:
       name: dave-ui
@@ -48,17 +48,17 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: dave-ui
-                  key: dave.auth_client_id
+                  key: dave.authClientId
             - name: DAVE_AUTH_SCOPES
               valueFrom:
                 configMapKeyRef:
                   name: dave-ui
-                  key: dave.auth_scopes
+                  key: dave.authScopes
             - name: DAVE_AUTH_FLOW
               valueFrom:
                 configMapKeyRef:
                   name: dave-ui
-                  key: dave.auth_flow
+                  key: dave.authFlow
             - name: DAVE_HTTP_COMPRESSION
               valueFrom:
                 configMapKeyRef:

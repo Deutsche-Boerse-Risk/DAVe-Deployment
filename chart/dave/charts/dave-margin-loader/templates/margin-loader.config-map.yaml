@@ -10,6 +10,6 @@ metadata:
 data:
   java.opts: "-Xmx768m -XX:MaxDirectMemorySize=768m"
   log.level: "INFO"
-  margin_loader.amqp_username: {{ .Values.cil_username | quote }}
-  margin_loader.amqp_hostname: {{ .Values.cil_hostname | quote }}
-  margin_loader.amqp_port: {{ .Values.cil_port | quote }}
+  margin_loader.amqp_username: {{ .Values.cilUsername | quote }}
+  margin_loader.amqp_hostname: {{ .Values.cilHostname | quote }}
+  margin_loader.amqp_port: {{ .Values.cilPort | quote }}

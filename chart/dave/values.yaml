@@ -1,48 +1,48 @@
 global:
-  ui_dns: <prefix>.dev.dbgcloud.io
-  api_dns: <prefix>.dev.dbgcloud.io
-  use_internal_load_balancer: true
-  internal_load_balancer_ip: 0.0.0.0/0
-  auth_dns: auth.dave.dbg-devops.com
-  auth_client_id: dave-ui
-  auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
-  ca_cert_b64enc: REQUIRED
+  uiDns: <prefix>.dev.dbgcloud.io
+  apiDns: <prefix>.dev.dbgcloud.io
+  useInternalLoadBalancer: true
+  internalLoadBalancerIp: 0.0.0.0/0
+  authDns: auth.dave.dbg-devops.com
+  authClientId: dave-ui
+  authWellKnownEndpoint: /auth/realms/DAVe/.well-known/openid-configuration
+  caCertB64Enc: REQUIRED
  
 dave-ui:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  auth_flow: openid-connect/direct
-  auth_scopes: "['profile']"
-  ui_key_b64enc: REQUIRED
-  ui_cert_b64enc: REQUIRED
+  minReplicas: 2
+  maxReplicas: 3
+  authFlow: openid-connect/direct
+  authScopes: "['profile']"
+  uiKeyB64Enc: REQUIRED
+  uiCertB64Enc: REQUIRED
 
 dave-store-manager:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  api_key_b64enc: REQUIRED
-  api_cert_b64enc: REQUIRED
-  database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-  database_name: DAVe-master
+  minReplicas: 2
+  maxReplicas: 3
+  apiKeyB64Enc: REQUIRED
+  apiCertB64Enc: REQUIRED
+  databaseConnectionUrl: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
+  databaseName: DAVe-master
 
 dave-margin-loader:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  ssl_key_b64enc: REQUIRED
-  ssl_cert_b64enc: REQUIRED
-  cil_hostname: REQUIRED
-  cil_port: REQUIRED
-  cil_username: REQUIRED
-  cil_password: REQUIRED
+  minReplicas: 2
+  maxReplicas: 3
+  sslKeyB64Enc: REQUIRED
+  sslCertB64Enc: REQUIRED
+  cilHostname: REQUIRED
+  cilPort: REQUIRED
+  cilUsername: REQUIRED
+  cilPassword: REQUIRED
 
 dave-api:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  api_key_b64enc: REQUIRED
-  api_cert_b64enc: REQUIRED
-  ssl_key_b64enc: REQUIRED
-  ssl_cert_b64enc: REQUIRED
+  minReplicas: 2
+  maxReplicas: 3
+  apiKeyB64Enc: REQUIRED
+  apiCertB64Enc: REQUIRED
+  sslKeyB64Enc: REQUIRED
+  sslCertB64Enc: REQUIRED
 

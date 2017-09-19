@@ -7,5 +7,5 @@ To learn more about the release, try:
   $ helm status {{ .Release.Name }}
   $ helm get {{ .Release.Name }}
 
-DAVe UI:  https://{{ .Values.global.ui_dns }}
-DAVe API: https://{{ .Values.global.api_dns }}
+DAVe UI:  https://{{ .Values.global.uiDns }}
+DAVe API: https://{{ .Values.global.apiDns }}

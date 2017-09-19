@@ -10,6 +10,6 @@ metadata:
 data:
   java.opts: "-Xmx512m -XX:MaxDirectMemorySize=1024m"
   log.level: "INFO"
-  mongo.name: {{ .Values.database_name | quote }}
-  mongo.connection_url: {{ .Values.database_connection_url | quote }}
+  mongo.name: {{ .Values.databaseName | quote }}
+  mongo.connection_url: {{ .Values.databaseConnectionUrl | quote }}
   api.ssl_require_client_auth: "true"

@@ -1,48 +1,48 @@
 global:
-  ui_dns: ui.risk.dev.dbgcloud.io
-  api_dns: api.risk.dev.dbgcloud.io
-  use_internal_load_balancer: true
-  internal_load_balancer_ip: 0.0.0.0/0
-  auth_dns: auth.dave.dbg-devops.com
-  auth_client_id: dave-ui
-  auth_well_known_endpoint: /auth/realms/DAVe/.well-known/openid-configuration
-  ca_cert_b64enc: {{ lookup('file', ca_public_key) | b64encode }}
+  uiDns: ui.risk.dev.dbgcloud.io
+  apiDns: api.risk.dev.dbgcloud.io
+  useInternalLoadBalancer: true
+  internalLoadBalancerIp: 0.0.0.0/0
+  authDns: auth.dave.dbg-devops.com
+  authClientId: dave-ui
+  authWellKnownEndpoint: /auth/realms/DAVe/.well-known/openid-configuration
+  caCertB64Enc: {{ lookup('file', ca_public_key) | b64encode }}
  
 dave-ui:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  auth_flow: openid-connect/direct
-  auth_scopes: "['profile']"
-  ui_key_b64enc: {{ lookup('file', ui_key_path) | b64encode }}
-  ui_cert_b64enc: {{ lookup('file', ui_cert_path) | b64encode }}
+  minReplicas: 2
+  maxReplicas: 3
+  authFlow: openid-connect/direct
+  authScopes: "['profile']"
+  uiKeyB64Enc: {{ lookup('file', uiKeyPath) | b64encode }}
+  uiCertB64Enc: {{ lookup('file', uiCertPath) | b64encode }}
 
 dave-store-manager:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  api_key_b64enc: {{ lookup('file', store_manager_ssl_key) | b64encode }}
-  api_cert_b64enc: {{ lookup('file', store_manager_ssl_cert) | b64encode }}
-  database_connection_url: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-  database_name: DAVe
+  minReplicas: 2
+  maxReplicas: 3
+  apiKeyB64Enc: {{ lookup('file', store_manager_ssl_key) | b64encode }}
+  apiCertB64Enc: {{ lookup('file', store_manager_ssl_cert) | b64encode }}
+  databaseConnectionUrl: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
+  databaseName: DAVe
 
 dave-margin-loader:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  ssl_key_b64enc: {{ lookup('file', margin_loader_ssl_key) | b64encode }}
-  ssl_cert_b64enc: {{ lookup('file', margin_loader_ssl_cert) | b64encode }}
-  cil_hostname: "prmbgc02.xeop.de"
-  cil_port: "22201"
-  cil_username: "DAVE"
-  cil_password: "DAVE"
+  minReplicas: 2
+  maxReplicas: 3
+  sslKeyB64Enc: {{ lookup('file', margin_loader_ssl_key) | b64encode }}
+  sslCertB64Enc: {{ lookup('file', margin_loader_ssl_cert) | b64encode }}
+  cilHostname: "prmbgc02.xeop.de"
+  cilPort: "22201"
+  cilUsername: "DAVE"
+  cilPassword: "DAVE"
 
 dave-api:
   release: master
-  min_replicas: 2
-  max_replicas: 3
-  api_key_b64enc: {{ lookup('file', api_key_path_pkcs8) | b64encode }}
-  api_cert_b64enc: {{ lookup('file', api_cert_path) | b64encode }}
-  ssl_key_b64enc: {{ lookup('file', api_ssl_key) | b64encode }}
-  ssl_cert_b64enc: {{ lookup('file', api_ssl_cert) | b64encode }}
+  minReplicas: 2
+  maxReplicas: 3
+  apiKeyB64Enc: {{ lookup('file', apiKeyPath_pkcs8) | b64encode }}
+  apiCertB64Enc: {{ lookup('file', apiCertPath) | b64encode }}
+  sslKeyB64Enc: {{ lookup('file', api_ssl_key) | b64encode }}
+  sslCertB64Enc: {{ lookup('file', api_ssl_cert) | b64encode }}
 
