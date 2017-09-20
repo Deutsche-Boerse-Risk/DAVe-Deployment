@@ -9,27 +9,30 @@ global:
   caCertB64Enc: REQUIRED
  
 dave-ui:
-  release: master
-  minReplicas: 2
-  maxReplicas: 3
+  image:
+    tag: master
+  minReplicaCount: 2
+  maxReplicaCount: 3
   authFlow: openid-connect/direct
   authScopes: "['profile']"
   uiKeyB64Enc: REQUIRED
   uiCertB64Enc: REQUIRED
 
 dave-store-manager:
-  release: master
-  minReplicas: 2
-  maxReplicas: 3
+  image:
+    tag: master
+  minReplicaCount: 2
+  maxReplicaCount: 3
   apiKeyB64Enc: REQUIRED
   apiCertB64Enc: REQUIRED
   databaseConnectionUrl: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
-  databaseName: DAVe-master
+  databaseName: DAVe
 
 dave-margin-loader:
-  release: master
-  minReplicas: 2
-  maxReplicas: 3
+  image:
+    tag: master
+  minReplicaCount: 2
+  maxReplicaCount: 3
   sslKeyB64Enc: REQUIRED
   sslCertB64Enc: REQUIRED
   cilHostname: REQUIRED
@@ -38,9 +41,10 @@ dave-margin-loader:
   cilPassword: REQUIRED
 
 dave-api:
-  release: master
-  minReplicas: 2
-  maxReplicas: 3
+  image:
+    tag: master
+  minReplicaCount: 2
+  maxReplicaCount: 3
   apiKeyB64Enc: REQUIRED
   apiCertB64Enc: REQUIRED
   sslKeyB64Enc: REQUIRED

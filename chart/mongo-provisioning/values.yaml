@@ -1,3 +1,29 @@
+images:
+  dbRestore:
+    repository: mongo
+    tag: 3.4
+    pullPolicy: Always
+  dbDownload:
+    repository: busybox
+    tag: latest
+    pullPolicy: Always
+
+resources:
+  dbRestore:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  dbDownload:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
 databaseName: DAVe
 
 # URL when tared and gziped unload of the database can be downloaded and loaded into the database

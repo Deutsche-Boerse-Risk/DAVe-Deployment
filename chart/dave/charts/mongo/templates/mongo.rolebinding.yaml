@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
-  name: dave-mongo-binding
+  name: {{ .Chart.Name }}-binding
   namespace: {{ .Release.Namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: dave-mongo
+  name: {{ .Chart.Name }}
 subjects:
   - kind: ServiceAccount
-    name: dave-mongo
+    name: {{ .Chart.Name }}
     namespace: {{ .Release.Namespace }}

@@ -1,108 +1,108 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dave-api
+  name: {{ .Chart.Name }}
   labels:
     app: dave
     layer: api
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.minReplicas }}
+  replicas: {{ .Values.minReplicaCount }}
   template:
     metadata:
-      name: dave-api
+      name: {{ .Chart.Name }}
       labels:
-        name: dave-api
+        name: {{ .Chart.Name }}
         app: dave
         layer: api
         project: dave
       #annotations:
-      #  container.apparmor.security.beta.kubernetes.io/dave-api: runtime/default
-      #  container.apparmor.seccomp.beta.kubernetes.io/dave-api: docker/default
+      #  container.apparmor.security.beta.kubernetes.io/{{ .Chart.Name }}: runtime/default
+      #  container.apparmor.seccomp.beta.kubernetes.io/{{ .Chart.Name }}: docker/default
     spec:
-      serviceAccount: dave-api
+      serviceAccount: {{ .Chart.Name }}
       containers:
-        - image: dbgdave/dave-api:{{ .Values.release }}
-          name: dave-api
-          imagePullPolicy: Always
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 2000m
-              memory: 2Gi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           env:
             - name: JAVA_OPTS
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: java.opts
             - name: LOG_LEVEL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: log.level
             - name: API_AUTH
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.auth
             - name: API_AUTH_WELL_KNOWN_URL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.auth_well_known
             - name: API_AUTH_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.authClientId
             - name: API_CSRF
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.csfr
             - name: API_CSRF_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.csrf_secret
             - name: API_SSL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.ssl
             - name: API_SSL_CLIENT_AUTH
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.ssl_client_auth
             - name: API_SSL_CERT
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.ssl_cert
             - name: API_SSL_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.ssl_key
             - name: API_COMPRESSION
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.compression
             - name: API_CORS
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.cors
             - name: API_CORS_ORIGIN
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: api.cors_origin
             - name: STOREMANAGER_HOSTNAME
               value: dave-store-manager
@@ -111,22 +111,22 @@ spec:
             - name: STOREMANAGER_SSL_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_key
             - name: STOREMANAGER_SSL_CERT
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_cert
             - name: STOREMANAGER_SSL_TRUST_CERTS
               valueFrom:
                 secretKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_trust_certs
             - name: STOREMANAGER_SSL_VERIFY_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: dave-api
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_verify_host
           ports:
             - containerPort: 8443

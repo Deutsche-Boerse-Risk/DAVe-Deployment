@@ -1,14 +1,14 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: dave-mongo
+  name: {{ .Chart.Name }}
   labels:
     app: mongo
     layer: db
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  serviceName: "dave-mongo"
+  serviceName: "{{ .Chart.Name }}"
   replicas: 3
   template:
     metadata:
@@ -17,11 +17,12 @@ spec:
         layer: db
         project: dave
     spec:
-      serviceAccount: dave-mongo
+      serviceAccount: {{ .Chart.Name }}
       terminationGracePeriodSeconds: 10
       containers:
-        - name: mongo
-          image: mongo:{{ .Values.release }}
+        - image: {{ .Values.images.mongo.repository }}:{{ .Values.images.mongo.tag }}
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.images.mongo.pullPolicy }}
           command:
             - mongod
             - "--replSet"
@@ -35,13 +36,14 @@ spec:
               mountPath: /data/db
           resources:
             requests:
-              cpu: 250m
-              memory: 512Mi
+              cpu: {{ .Values.resources.mongo.requests.cpu }}
+              memory: {{ .Values.resources.mongo.requests.memory }}
             limits:
-              cpu: 1000m
-              memory: 2Gi
-        - name: mongo-sidecar
-          image: cvallance/mongo-k8s-sidecar
+              cpu: {{ .Values.resources.mongo.limits.cpu }}
+              memory: {{ .Values.resources.mongo.limits.memory }}
+        - image: {{ .Values.images.mongoSidecar.repository }}:{{ .Values.images.mongoSidecar.tag }}
+          name: {{ .Chart.Name }}-sidecar
+          imagePullPolicy: {{ .Values.images.mongoSidecar.pullPolicy }}
           env:
             - name: MONGO_SIDECAR_POD_LABELS
               value: "app=mongo,layer=db,project=dave"
@@ -49,11 +51,11 @@ spec:
               value: {{ .Release.Namespace | quote }}
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: {{ .Values.resources.mongoSidecar.requests.cpu }}
+              memory: {{ .Values.resources.mongoSidecar.requests.memory }}
             limits:
-              cpu: 200m
-              memory: 512Mi
+              cpu: {{ .Values.resources.mongoSidecar.limits.cpu }}
+              memory: {{ .Values.resources.mongoSidecar.limits.memory }}
   volumeClaimTemplates:
   - metadata:
       name: mongo-persistent-storage

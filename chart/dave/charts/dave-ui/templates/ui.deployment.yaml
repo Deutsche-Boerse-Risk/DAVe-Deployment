@@ -1,78 +1,78 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dave-ui
+  name: {{ .Chart.Name }}
   labels:
     app: dave
     layer: frontend
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.minReplicas }}
+  replicas: {{ .Values.minReplicaCount }}
   template:
     metadata:
-      name: dave-ui
+      name: {{ .Chart.Name }}
       labels:
-        name: dave-ui
+        name: {{ .Chart.Name }}
         app: dave
         layer: frontend
         project: dave
       #annotations:
-      #  container.apparmor.security.beta.kubernetes.io/dave-ui: runtime/default
-      #  container.apparmor.seccomp.beta.kubernetes.io/dave-ui: docker/default
+      #  container.apparmor.security.beta.kubernetes.io/{{ .Chart.Name }}: runtime/default
+      #  container.apparmor.seccomp.beta.kubernetes.io/{{ .Chart.Name }}: docker/default
     spec:
-      serviceAccount: dave-ui
+      serviceAccount: {{ .Chart.Name }}
       containers:
-        - image: dbgdave/dave-ui:{{ .Values.release }}
-          name: dave-ui
-          imagePullPolicy: Always
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             requests:
-              cpu: 100m
-              memory: 64Mi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 1000m
-              memory: 128Mi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           env:
             - name: DAVE_REST_URL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: dave.api
             - name: DAVE_AUTH_WELL_KNOWN_URL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: dave.auth_well_known
             - name: DAVE_AUTH_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: dave.authClientId
             - name: DAVE_AUTH_SCOPES
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: dave.authScopes
             - name: DAVE_AUTH_FLOW
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: dave.authFlow
             - name: DAVE_HTTP_COMPRESSION
               valueFrom:
                 configMapKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: http.compression
             - name: DAVE_HTTP_SSL_SERVER_PUBLIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: http.public_key
             - name: DAVE_HTTP_SSL_SERVER_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-ui
+                  name: {{ .Chart.Name }}
                   key: http.private_key
           ports:
             - containerPort: 80

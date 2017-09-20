@@ -1,78 +1,78 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dave-store-manager
+  name: {{ .Chart.Name }}
   labels:
     app: dave
     layer: db
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.minReplicas }}
+  replicas: {{ .Values.minReplicaCount }}
   template:
     metadata:
-      name: dave-store-manager
+      name: {{ .Chart.Name }}
       labels:
-        name: dave-store-manager
+        name: {{ .Chart.Name }}
         app: dave
         layer: db
         project: dave
       #annotations:
-      #  container.apparmor.security.beta.kubernetes.io/dave-store-manager: runtime/default
-      #  container.apparmor.seccomp.beta.kubernetes.io/dave-store-manager: docker/default
+      #  container.apparmor.security.beta.kubernetes.io/{{ .Chart.Name }}: runtime/default
+      #  container.apparmor.seccomp.beta.kubernetes.io/{{ .Chart.Name }}: docker/default
     spec:
-      serviceAccount: dave-store-manager
+      serviceAccount: {{ .Chart.Name }}
       containers:
-        - image: dbgdave/dave-store-manager:{{ .Values.release }}
-          name: dave-store-manager
-          imagePullPolicy: Always
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 2000m
-              memory: 2Gi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           env:
             - name: JAVA_OPTS
               valueFrom:
                 configMapKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: java.opts
             - name: LOG_LEVEL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: log.level
             - name: MONGO_DB
               valueFrom:
                 configMapKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: mongo.name
             - name: MONGO_CONNECTION_URL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: mongo.connection_url
             - name: API_SSL_REQUIRE_CLIENT_AUTH
               valueFrom:
                 configMapKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: api.ssl_require_client_auth
             - name: API_SSL_CERT
               valueFrom:
                 secretKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: api.ssl_cert
             - name: API_SSL_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: api.ssl_key
             - name: API_SSL_TRUST_CERTS
               valueFrom:
                 secretKeyRef:
-                  name: dave-store-manager
+                  name: {{ .Chart.Name }}
                   key: api.ssl_trust_certs
           ports:
             - containerPort: 8443

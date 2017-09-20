@@ -5,7 +5,7 @@ metadata:
     app: dave
     layer: db
     project: dave
-  name: dave-store-manager
+  name: {{ .Chart.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
   ports:
@@ -13,5 +13,5 @@ spec:
       port: 443
       targetPort: 8443
   selector:
-    name: dave-store-manager
+    name: {{ .Chart.Name }}
   type: ClusterIP

@@ -64,9 +64,9 @@ internalLoadBalancerIp` | Internal load balancer ip specification | `0.0.0.0/0` 
 | `global.authWellKnownEndpoint` | URL of `.well-known/openid-configuration` endpoint of the OpenID backend | `/auth/realms/DAVe/.well-known/openid-configuration` |
 | `global.authClientId` | OAuth / OpenID Connect client ID | `dave-ui` |
 | `global.caCertB64Enc` | Internal CA base64 encoded |  |
-| `*.release` | Which Docker image tag should be used in the deployment of the package | `1.0.0` |
-| `*.minReplicas` | Min number of replicas for the package  | `1` |
-| `*.maxReplicas` | Max number of replicas for the package | `10` |
+| `*.image.tag` | Which Docker image tag should be used in the deployment of the package | `1.0.0` |
+| `*.minReplicaCount` | Min number of replicas for the package  | `1` |
+| `*.maxReplicaCount` | Max number of replicas for the package | `10` |
 | `dave-ui.authFlow` | OpenID authorization flow type; one of `openid-connect/direct`, `openid-connect/authorization-code`, `openid-connect/hybrid ` or`openid-connect/implicit` | `openid-connect/authorization-code` |
 | `dave-ui.authScopes` | Additional authorization scopes. The `openid` scope is added automatically. | `['profile']` |
 | `dave-store-manager.databaseConnectionUrl` | MongoDB database connection URL. If not defined, it will be generated to link to MongoDB deployed by this tooling. If defined, the MongoDB deployment will be skipped. | |

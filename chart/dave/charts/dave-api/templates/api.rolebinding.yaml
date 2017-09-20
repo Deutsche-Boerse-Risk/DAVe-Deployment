@@ -1,7 +1,7 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
-  name: dave-api
+  name: {{ .Chart.Name }}
   labels:
     app: dave
     layer: api
@@ -9,9 +9,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount
-    name: dave-api
+    name: {{ .Chart.Name }}
     namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
-  name: dave-api
+  name: {{ .Chart.Name }}
   apiGroup: rbac.authorization.k8s.io

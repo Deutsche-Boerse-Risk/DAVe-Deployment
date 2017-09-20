@@ -1,1 +1,26 @@
-release: 3.4
+images:
+  mongo:
+    repository: mongo
+    tag: 3.4
+    pullPolicy: Always
+  mongoSidecar:
+    repository: cvallance/mongo-k8s-sidecar
+    tag: latest
+    pullPolicy: Always
+
+resources:
+  mongo:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+  mongoSidecar:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 200m
+      memory: 512Mi
+

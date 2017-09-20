@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: dave-margin-loader
+  name: {{ .Chart.Name }}
   labels:
     app: dave
     layer: loader
     project: dave
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.minReplicas }}
+  replicas: {{ .Values.minReplicaCount }}
   template:
     metadata:
-      name: dave-margin-loader
+      name: {{ .Chart.Name }}
       labels:
-        name: dave-margin-loader
+        name: {{ .Chart.Name }}
         app: dave
         layer: loader
         project: dave
@@ -21,67 +21,67 @@ spec:
       #  container.apparmor.security.beta.kubernetes.io/dave-api: runtime/default
       #  container.apparmor.seccomp.beta.kubernetes.io/dave-api: docker/default
     spec:
-      serviceAccount: dave-margin-loader
+      serviceAccount: {{ .Chart.Name }}
       containers:
-        - image: dbgdave/dave-margin-loader:{{ .Values.release }}
-          name: dave-margin-loader
-          imagePullPolicy: Always
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          name: {{ .Chart.Name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             requests:
-              cpu: 500m
-              memory: 1Gi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 2000m
-              memory: 2Gi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           env:
             - name: JAVA_OPTS
               valueFrom:
                 configMapKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: java.opts
             - name: LOG_LEVEL
               valueFrom:
                 configMapKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: log.level
             - name: AMQP_HOSTNAME
               valueFrom:
                 configMapKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: margin_loader.amqp_hostname
             - name: AMQP_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: margin_loader.amqp_port
             - name: AMQP_USERNAME
               valueFrom:
                 configMapKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: margin_loader.amqp_username
             - name: AMQP_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: margin_loader.amqp_password
             - name: STOREMANAGER_HOSTNAME
-              value: dave-store-manager
+              value: {{ .Chart.Name }}
             - name: STOREMANAGER_PORT
               value: "443"
             - name: STOREMANAGER_SSL_KEY
               valueFrom:
                 secretKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_key
             - name: STOREMANAGER_SSL_CERT
               valueFrom:
                 secretKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_cert
             - name: STOREMANAGER_SSL_TRUST_CERTS
               valueFrom:
                 secretKeyRef:
-                  name: dave-margin-loader
+                  name: {{ .Chart.Name }}
                   key: storemanager.ssl_trust_certs
           livenessProbe:
             httpGet:

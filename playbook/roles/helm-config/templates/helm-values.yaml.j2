@@ -10,8 +10,8 @@ global:
  
 dave-ui:
   release: master
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicaCount: 2
+  maxReplicaCount: 3
   authFlow: openid-connect/direct
   authScopes: "['profile']"
   uiKeyB64Enc: {{ lookup('file', uiKeyPath) | b64encode }}
@@ -19,8 +19,8 @@ dave-ui:
 
 dave-store-manager:
   release: master
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicaCount: 2
+  maxReplicaCount: 3
   apiKeyB64Enc: {{ lookup('file', store_manager_ssl_key) | b64encode }}
   apiCertB64Enc: {{ lookup('file', store_manager_ssl_cert) | b64encode }}
   databaseConnectionUrl: "mongodb://dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017/?replicaSet=rs0"
@@ -28,8 +28,8 @@ dave-store-manager:
 
 dave-margin-loader:
   release: master
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicaCount: 2
+  maxReplicaCount: 3
   sslKeyB64Enc: {{ lookup('file', margin_loader_ssl_key) | b64encode }}
   sslCertB64Enc: {{ lookup('file', margin_loader_ssl_cert) | b64encode }}
   cilHostname: "prmbgc02.xeop.de"
@@ -39,8 +39,8 @@ dave-margin-loader:
 
 dave-api:
   release: master
-  minReplicas: 2
-  maxReplicas: 3
+  minReplicaCount: 2
+  maxReplicaCount: 3
   apiKeyB64Enc: {{ lookup('file', apiKeyPath_pkcs8) | b64encode }}
   apiCertB64Enc: {{ lookup('file', apiCertPath) | b64encode }}
   sslKeyB64Enc: {{ lookup('file', api_ssl_key) | b64encode }}

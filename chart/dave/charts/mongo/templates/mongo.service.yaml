@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dave-mongo
+  name: {{ .Chart.Name }}
   labels:
-    name: dave-mongo
+    name: {{ .Chart.Name }}
     app: mongo
     layer: db
     project: dave

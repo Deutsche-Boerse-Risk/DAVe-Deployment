@@ -17,8 +17,9 @@ spec:
         project: dave
     spec:
       containers:
-      - name: db-restore
-        image: mongo:3.4
+      - image: {{ .Values.images.dbRestore.repository }}:{{ .Values.images.dbRestore.tag }}
+        name: {{ .Chart.Name }}-restore
+        imagePullPolicy: {{ .Values.images.dbRestore.pullPolicy }}
         volumeMounts:
           - mountPath: /db
             name: db-volume
@@ -26,25 +27,26 @@ spec:
             name: restore-script-volume
         resources:
           requests:
-            cpu: 100m
-            memory: 256Mi
+            cpu: {{ .Values.resources.dbRestore.requests.cpu }}
+            memory: {{ .Values.resources.dbRestore.requests.memory }}
           limits:
-            cpu: 200m
-            memory: 256Mi
+            cpu: {{ .Values.resources.dbRestore.limits.cpu }}
+            memory: {{ .Values.resources.dbRestore.limits.memory }}
         command: ["bash", "restore-script/mongo-restore.sh"]
       initContainers:
-      - name: db-download
-        image: busybox
+      - image: {{ .Values.images.dbDownload.repository }}:{{ .Values.images.dbDownload.tag }}
+        name: {{ .Chart.Name }}-download
+        imagePullPolicy: {{ .Values.images.dbDownload.pullPolicy }}
         volumeMounts:
           - mountPath: /db
             name: db-volume
         resources:
           requests:
-            cpu: 100m
-            memory: 256Mi
+            cpu: {{ .Values.resources.dbDownload.requests.cpu }}
+            memory: {{ .Values.resources.dbDownload.requests.memory }}
           limits:
-            cpu: 200m
-            memory: 256Mi
+            cpu: {{ .Values.resources.dbDownload.limits.cpu }}
+            memory: {{ .Values.resources.dbDownload.limits.memory }}
         command: ["wget",  {{ .Values.db_unload_url | quote }}, "-O", "/db/db.tar.gz"]
       volumes:
         - name: db-volume

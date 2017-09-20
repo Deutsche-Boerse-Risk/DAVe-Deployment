@@ -10,7 +10,7 @@ metadata:
     {{- if .Values.global.useInternalLoadBalancer }}
     service.beta.kubernetes.io/aws-load-balancer-internal: {{ .Values.global.internalLoadBalancerIp | quote }}
     {{- end }}
-  name: dave-api
+  name: {{ .Chart.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
   ports:
@@ -18,5 +18,5 @@ spec:
       port: 443
       targetPort: 8443
   selector:
-    name: dave-api
+    name: {{ .Chart.Name }}
   type: LoadBalancer
