@@ -31,4 +31,4 @@ db_unload_url: https://s3-eu-west-1.amazonaws.com/dave-demo-test-data/dave20.tar
 
 # Path under which the actual unload files are stored in the archive
 db_unload_path: mongo
-databaseConnectionUrl: rs0/dave-mongo-0.dave-mongo.dave:27017,dave-mongo-1.dave-mongo.dave:27017,dave-mongo-2.dave-mongo.dave:27017
+databaseConnectionUrl: rs0/dave-mongo-0.dave-mongo:27017,dave-mongo-1.dave-mongo:27017,dave-mongo-2.dave-mongo:27017
