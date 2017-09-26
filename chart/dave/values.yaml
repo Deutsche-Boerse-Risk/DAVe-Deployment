@@ -29,6 +29,7 @@ dave-store-manager:
   databaseName: DAVe
 
 dave-margin-loader:
+  deploy: true
   image:
     tag: master
   minReplicaCount: 2

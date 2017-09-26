@@ -1,3 +1,4 @@
+{{- if .Values.deploy -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -13,3 +14,4 @@ data:
   margin_loader.amqp_username: {{ .Values.cilUsername | quote }}
   margin_loader.amqp_hostname: {{ .Values.cilHostname | quote }}
   margin_loader.amqp_port: {{ .Values.cilPort | quote }}
+{{- end -}}

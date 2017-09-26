@@ -1,6 +1,8 @@
 global:
   caCertB64Enc: REQUIRED
 
+deploy: true
+
 image:
   repository: dbgdave/dave-margin-loader
   tag: master

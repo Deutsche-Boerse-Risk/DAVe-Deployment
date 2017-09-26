@@ -1,3 +1,4 @@
+{{- if .Values.deploy -}}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
@@ -15,3 +16,4 @@ roleRef:
   kind: Role
   name: {{ .Chart.Name }}
   apiGroup: rbac.authorization.k8s.io
+{{- end -}}

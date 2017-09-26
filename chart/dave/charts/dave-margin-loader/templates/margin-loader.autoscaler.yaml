@@ -1,3 +1,4 @@
+{{- if .Values.deploy -}}
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -11,3 +12,4 @@ spec:
   minReplicas: {{ .Values.minReplicaCount }}
   maxReplicas: {{ .Values.maxReplicaCount }}
   targetCPUUtilizationPercentage: 75
+{{- end -}}
