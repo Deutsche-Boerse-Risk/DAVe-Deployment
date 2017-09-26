@@ -1,7 +1,9 @@
-apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: {{ .Chart.Name }}
+  labels:
+{{ toYaml .Values.labels | indent 4 }}
   namespace: {{ .Release.Namespace }}
 rules:
 - apiGroups:

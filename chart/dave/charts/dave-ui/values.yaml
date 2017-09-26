@@ -7,6 +7,11 @@ global:
   authClientId: dave-ui
   authWellKnownEndpoint: /auth/realms/DAVe/.well-known/openid-configuration
 
+labels:
+  app: dave
+  layer: frontend
+  project: dave
+
 image:
   repository: dbgdave/dave-ui
   tag: master

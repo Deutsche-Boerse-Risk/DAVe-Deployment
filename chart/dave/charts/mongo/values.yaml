@@ -1,3 +1,8 @@
+labels:
+  app: mongo
+  layer: db
+  project: dave
+
 images:
   mongo:
     repository: mongo

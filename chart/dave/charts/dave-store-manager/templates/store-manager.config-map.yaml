@@ -4,9 +4,7 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: dave
-    layer: db
-    project: dave
+{{ toYaml .Values.labels | indent 4 }}
 data:
   java.opts: "-Xmx512m -XX:MaxDirectMemorySize=1024m"
   log.level: "INFO"

@@ -4,9 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    app: dave
-    layer: loader
-    project: dave
+{{ toYaml .Values.labels | indent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.minReplicaCount }}
@@ -15,25 +13,20 @@ spec:
       name: {{ .Chart.Name }}
       labels:
         name: {{ .Chart.Name }}
-        app: dave
-        layer: loader
-        project: dave
+{{ toYaml .Values.labels | indent 8 }}
       #annotations:
-      #  container.apparmor.security.beta.kubernetes.io/dave-api: runtime/default
-      #  container.apparmor.seccomp.beta.kubernetes.io/dave-api: docker/default
+      #  container.apparmor.security.beta.kubernetes.io/{{ .Chart.Name }}: runtime/default
+      #  container.apparmor.seccomp.beta.kubernetes.io/{{ .Chart.Name }}: docker/default
     spec:
       serviceAccount: {{ .Chart.Name }}
       containers:
         - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           name: {{ .Chart.Name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.resources }}
           resources:
-            requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
+{{ toYaml .Values.resources | indent 12 }}
+        {{- end }}
           env:
             - name: JAVA_OPTS
               valueFrom:

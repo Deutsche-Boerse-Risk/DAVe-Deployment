@@ -3,19 +3,17 @@ kind: StatefulSet
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    app: mongo
-    layer: db
-    project: dave
+{{ toYaml .Values.labels | indent 4 }}
   namespace: {{ .Release.Namespace }}
 spec:
   serviceName: "{{ .Chart.Name }}"
   replicas: 3
   template:
     metadata:
+      name: {{ .Chart.Name }}
       labels:
-        app: mongo
-        layer: db
-        project: dave
+        name: {{ .Chart.Name }}
+{{ toYaml .Values.labels | indent 8 }}
     spec:
       serviceAccount: {{ .Chart.Name }}
       terminationGracePeriodSeconds: 10
@@ -34,28 +32,22 @@ spec:
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
+        {{- if .Values.resources.mongo }}
           resources:
-            requests:
-              cpu: {{ .Values.resources.mongo.requests.cpu }}
-              memory: {{ .Values.resources.mongo.requests.memory }}
-            limits:
-              cpu: {{ .Values.resources.mongo.limits.cpu }}
-              memory: {{ .Values.resources.mongo.limits.memory }}
+{{ toYaml .Values.resources.mongo | indent 12 }}
+        {{- end }}
         - image: {{ .Values.images.mongoSidecar.repository }}:{{ .Values.images.mongoSidecar.tag }}
           name: {{ .Chart.Name }}-sidecar
           imagePullPolicy: {{ .Values.images.mongoSidecar.pullPolicy }}
           env:
             - name: MONGO_SIDECAR_POD_LABELS
-              value: "app=mongo,layer=db,project=dave"
+              value: {{ include "sidecar.labels" . }}
             - name: KUBE_NAMESPACE
               value: {{ .Release.Namespace | quote }}
+        {{- if .Values.resources.mongoSidecar }}
           resources:
-            requests:
-              cpu: {{ .Values.resources.mongoSidecar.requests.cpu }}
-              memory: {{ .Values.resources.mongoSidecar.requests.memory }}
-            limits:
-              cpu: {{ .Values.resources.mongoSidecar.limits.cpu }}
-              memory: {{ .Values.resources.mongoSidecar.limits.memory }}
+{{ toYaml .Values.resources.mongoSidecar | indent 12 }}
+        {{- end }}
   volumeClaimTemplates:
   - metadata:
       name: mongo-persistent-storage

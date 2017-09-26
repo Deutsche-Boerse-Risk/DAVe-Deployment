@@ -4,9 +4,7 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: dave
-    layer: frontend
-    project: dave
+{{ toYaml .Values.labels | indent 4 }}
 data:
   dave.api: "https://{{ .Values.global.apiDns }}"
   dave.auth_well_known: "https://{{ .Values.global.authDns }}{{ .Values.global.authWellKnownEndpoint }}"

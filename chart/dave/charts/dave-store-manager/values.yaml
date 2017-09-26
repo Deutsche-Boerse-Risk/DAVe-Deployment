@@ -1,6 +1,11 @@
 global:
   caCertB64Enc: REQUIRED
 
+labels:
+  app: dave
+  layer: db
+  project: dave
+
 image:
   repository: dbgdave/dave-store-manager
   tag: master

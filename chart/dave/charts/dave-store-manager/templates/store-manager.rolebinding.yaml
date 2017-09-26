@@ -3,9 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1alpha1
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    app: dave
-    layer: db
-    project: dave
+{{ toYaml .Values.labels | indent 4 }}
   namespace: {{ .Release.Namespace }}
 subjects:
   - kind: ServiceAccount

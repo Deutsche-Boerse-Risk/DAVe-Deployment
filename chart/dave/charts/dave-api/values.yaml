@@ -4,6 +4,11 @@ global:
   internalLoadBalancerIp: 0.0.0.0/0
   caCertB64Enc: REQUIRED
 
+labels:
+  app: dave
+  layer: api
+  project: dave
+
 image:
   repository: dbgdave/dave-api
   tag: master
