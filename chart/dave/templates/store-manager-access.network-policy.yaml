@@ -1,7 +1,7 @@
 kind: NetworkPolicy
 apiVersion: extensions/v1beta1
 metadata:
-  name: dave-store-manager-access
+  name: {{ .Chart.Name }}-store-manager-access
   namespace: {{ .Release.Namespace }}
 spec:
   podSelector:
